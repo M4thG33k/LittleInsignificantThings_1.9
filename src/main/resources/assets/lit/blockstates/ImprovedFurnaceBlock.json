@@ -1,0 +1,31 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:orientable",
+    "transform": "forge:default-block",
+    "textures": {
+      "side": "lit:blocks/ImprovedFurnaceBlock",
+      "top": "lit:blocks/ImprovedFurnaceBlock"
+    }
+  },
+  "variants": {
+    "facing": {
+      "north" : {},
+      "south": {"y": 180},
+      "west": {"y": 270},
+      "east": {"y": 90}
+    },
+    "on": {
+      "true": {
+        "textures": {
+          "front": "lit:blocks/ImprovedFurnaceBlockFrontON"
+        }
+      },
+      "false": {
+        "textures": {
+          "front": "lit:blocks/ImprovedFurnaceBlockFront"
+        }
+      }
+    }
+  }
+}

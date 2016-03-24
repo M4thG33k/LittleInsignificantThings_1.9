@@ -1,0 +1,16 @@
+[
+{
+  "modid": "lit",
+  "name": "Little Insignificant Things",
+  "description": "Little things can go a long way...",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["M4thG33k"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
