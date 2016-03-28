@@ -172,6 +172,11 @@ public class ContainerImprovedFurnace extends Container{
             {
                 iCrafting.sendProgressBarUpdate(this,8,this.te.getNumSmeltable());
             }
+
+            if (!ItemStack.areItemStacksEqual(this.outputStack,this.te.getStackInSlot(2)))
+            {
+                iCrafting.sendProgressBarUpdate(this,9,0);
+            }
         }
 
         this.cookTime = te.cookTime;
@@ -238,7 +243,11 @@ public class ContainerImprovedFurnace extends Container{
             case 8:
                 getNumSmeltable = data;
                 break;
+            case 9:
+                this.te.getWorld().markAndNotifyBlock(this.te.getPos(),null,this.te.getWorld().getBlockState(this.te.getPos()),this.te.getWorld().getBlockState(this.te.getPos()),0);
             default:
         }
     }
+
+
 }

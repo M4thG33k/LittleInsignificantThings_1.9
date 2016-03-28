@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -30,7 +31,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.BlockPos;
 
-public class TileImprovedFurnace extends TileEntity implements IInventory,ITickable{
+public class TileImprovedFurnace extends TileEntity implements ISidedInventory,ITickable{
 
     private ItemStack[] inventory;
     private String customName;
@@ -482,6 +483,7 @@ public class TileImprovedFurnace extends TileEntity implements IInventory,ITicka
 
     public int getCookTime(ItemStack stack)
     {
+//        return 5;
         return (int)(Math.floor(200*cookTimeFactor));
     }
 
@@ -640,5 +642,61 @@ public class TileImprovedFurnace extends TileEntity implements IInventory,ITicka
 
             world.spawnEntityInWorld(item);
         }
+    }
+
+    @Override
+    public int[] getSlotsForFace(EnumFacing side) {
+        if (side== EnumFacing.UP)
+        {
+            return new int[]{1,2};
+        }
+        if (side==EnumFacing.DOWN)
+        {
+            return new int[]{0,2};
+        }
+        return new int[]{0,2};
+
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction) {
+        if (direction==EnumFacing.UP)
+        {
+            if (index==0)
+            {
+                return false;
+            }
+            return this.isItemValidForSlot(index,itemStackIn);
+        }
+        if (direction==EnumFacing.DOWN)
+        {
+            if (index==0)
+            {
+                return this.isItemValidForSlot(index,itemStackIn);
+            }
+            return false;
+        }
+        if (index!=0)
+        {
+            return false;
+        }
+        return this.isItemValidForSlot(index,itemStackIn);
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
+        if (index==2)
+        {
+            return true;
+        }
+        if (index==0)
+        {
+            if (stack!=null && stack.getItem() == Items.bucket)
+            {
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }
