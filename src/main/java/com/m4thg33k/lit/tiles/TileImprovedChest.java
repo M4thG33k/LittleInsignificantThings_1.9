@@ -157,6 +157,10 @@ public class TileImprovedChest extends TileEntityLockable implements ITickable, 
         }
         facing = EnumFacing.values()[compound.getInteger("Facing")];
 //        facing = compound.getByte("Facing");
+        if (compound.hasKey("Type"))
+        {
+            type = ChestTypes.getTypeByName(compound.getString("Type"));
+        }
     }
 
     @Override
@@ -181,6 +185,8 @@ public class TileImprovedChest extends TileEntityLockable implements ITickable, 
         {
             compound.setString("CustomName",customName);
         }
+
+        compound.setString("Type",type.getTypeName());
     }
 
     @Override
