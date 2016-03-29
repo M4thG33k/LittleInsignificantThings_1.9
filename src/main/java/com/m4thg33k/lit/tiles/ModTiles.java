@@ -9,5 +9,6 @@ public class ModTiles {
     {
         String prefix = "tile.lit";
         GameRegistry.registerTileEntity(TileImprovedFurnace.class,prefix + Names.IMPROVED_FURNACE);
+        GameRegistry.registerTileEntity(TileImprovedChest.class,prefix + Names.IMPROVED_CHEST);
     }
 }

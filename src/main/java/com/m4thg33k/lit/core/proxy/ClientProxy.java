@@ -1,6 +1,7 @@
 package com.m4thg33k.lit.core.proxy;
 
 import com.m4thg33k.lit.LIT;
+import com.m4thg33k.lit.client.render.ModRenders;
 import com.m4thg33k.lit.client.render.registers.BlockRenderRegister;
 import com.m4thg33k.lit.client.render.registers.ItemRenderRegister;
 import com.m4thg33k.lit.network.packets.PacketNBT;
@@ -26,6 +27,7 @@ public class ClientProxy extends CommonProxy {
         super.init(e);
 
         BlockRenderRegister.registerBlockRenderer();
+        ModRenders.init();
     }
 
     @Override
@@ -38,7 +40,5 @@ public class ClientProxy extends CommonProxy {
         World world = Minecraft.getMinecraft().theWorld;
         Minecraft.getMinecraft().theWorld.getTileEntity(pkt.pos).readFromNBT(pkt.compound);
         Minecraft.getMinecraft().theWorld.notifyBlockUpdate(pkt.pos,world.getBlockState(pkt.pos),world.getBlockState(pkt.pos),0);
-//        Minecraft.getMinecraft().theWorld.notifyBlockUpdate(pkt.pos,);
-//        Minecraft.getMinecraft().theWorld.markBlockForUpdate(pkt.pos);
     }
 }

@@ -10,3 +10,4 @@ itemGroup.tabLIT=LIT
 # Blocks
 #-------------------------------------------------------------------
 tile.ImprovedFurnaceBlock.name=Improved Furnace
+tile.ImprovedChestBlock.name=Improved Chest

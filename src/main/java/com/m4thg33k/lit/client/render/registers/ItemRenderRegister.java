@@ -14,5 +14,7 @@ public class ItemRenderRegister {
         //itemblocks
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.improvedFurnaceBlock),0,new ModelResourceLocation(LIT.MODID+":"+ Names.IMPROVED_FURNACE,"facing=north,on=false"));
 
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.improvedChestBlock),0,new ModelResourceLocation(LIT.MODID+":"+Names.IMPROVED_CHEST,"inventory"));
+
     }
 }
