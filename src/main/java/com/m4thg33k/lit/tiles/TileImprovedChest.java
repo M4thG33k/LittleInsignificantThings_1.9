@@ -137,6 +137,10 @@ public class TileImprovedChest extends TileEntityLockable implements ITickable, 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
+        if (compound.hasKey("Type"))
+        {
+            type = ChestTypes.getTypeByName(compound.getString("Type"));
+        }
 
         NBTTagList list = compound.getTagList("Items",10);
         this.inventory = new ItemStack[getSizeInventory()];
@@ -157,10 +161,7 @@ public class TileImprovedChest extends TileEntityLockable implements ITickable, 
         }
         facing = EnumFacing.values()[compound.getInteger("Facing")];
 //        facing = compound.getByte("Facing");
-        if (compound.hasKey("Type"))
-        {
-            type = ChestTypes.getTypeByName(compound.getString("Type"));
-        }
+
     }
 
     @Override

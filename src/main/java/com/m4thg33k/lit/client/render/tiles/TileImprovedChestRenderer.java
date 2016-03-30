@@ -1,6 +1,7 @@
 package com.m4thg33k.lit.client.render.tiles;
 
 import com.m4thg33k.lit.api.chest.ChestTypes;
+import com.m4thg33k.lit.blocks.ImprovedChestBlock;
 import com.m4thg33k.lit.blocks.ModBlocks;
 import com.m4thg33k.lit.tiles.TileImprovedChest;
 import net.minecraft.client.model.ModelChest;
@@ -27,7 +28,7 @@ public class TileImprovedChestRenderer extends TileEntitySpecialRenderer{
         int facing = 3;
         ChestTypes type = tile.getType();
 
-        if (tile.hasWorldObj() && tile.getWorld().getBlockState(tile.getPos()).getBlock() == ModBlocks.improvedChestBlock)
+        if (tile.hasWorldObj() && tile.getWorld().getBlockState(tile.getPos()).getBlock() instanceof ImprovedChestBlock)
         {
             facing = tile.getFacing().ordinal();
             type = tile.getType();
