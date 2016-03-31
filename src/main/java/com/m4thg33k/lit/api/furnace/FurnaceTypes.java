@@ -22,8 +22,10 @@ public class FurnaceTypes {
     private int maxFuel;
     private ItemStack block;
     private ItemStack material;
+    private boolean overrideFurnace;
+    private ItemStack[] alternateCenter;
 
-    public FurnaceTypes(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material)
+    public FurnaceTypes(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material,boolean overrideFurnace,Object... alternateCenter)
     {
         this.typeName = typeName;
         this.cookTimeFactor = cookTimeFactor;
@@ -32,11 +34,17 @@ public class FurnaceTypes {
         this.maxFuel = maxFuel;
         this.material = material;
         this.block = block;
+        this.overrideFurnace = overrideFurnace;
+        this.alternateCenter = new ItemStack[alternateCenter.length];
+        for (int i=0;i<alternateCenter.length;i++)
+        {
+            this.alternateCenter[i] = ((ItemStack)alternateCenter[i]).copy();
+        }
     }
 
-    public static void addType(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material)
+    public static void addType(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material,boolean overrideFurnace, Object... alternateCenter)
     {
-        FurnaceTypes type = new FurnaceTypes(typeName, cookTimeFactor, upgradeCount, fuelBooster, maxFuel,block,material);
+        FurnaceTypes type = new FurnaceTypes(typeName, cookTimeFactor, upgradeCount, fuelBooster, maxFuel,block,material,overrideFurnace,alternateCenter);
         allTypes.add(type);
     }
 
@@ -87,6 +95,13 @@ public class FurnaceTypes {
 
     public void registerRecipe()
     {
-        GameRegistry.addRecipe(block," m "," f "," m ",'f', Blocks.furnace,'m',material);
+        if (!overrideFurnace)
+        {
+            GameRegistry.addRecipe(block," m "," f "," m ",'f', Blocks.furnace,'m',material);
+        }
+        for (ItemStack center : alternateCenter)
+        {
+            GameRegistry.addRecipe(block," m "," f "," m ",'f',center,'m',material);
+        }
     }
 }

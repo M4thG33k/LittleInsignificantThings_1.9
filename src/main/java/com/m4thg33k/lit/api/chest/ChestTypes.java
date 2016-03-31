@@ -24,9 +24,11 @@ public class ChestTypes {
     private ItemStack material;
     private ItemStack block;
     private boolean useCheapRecipe;
+    private boolean overrideCenter;
+    private ItemStack[] alternateCenters;
 
 
-    public ChestTypes(String typeName, int size, boolean isExpResistant,ResourceLocation guiLocation, int width, int height,int rowCount,int rowLength,ResourceLocation modelTexture,ItemStack material,ItemStack block,boolean useCheapRecipe)
+    public ChestTypes(String typeName, int size, boolean isExpResistant,ResourceLocation guiLocation, int width, int height,int rowCount,int rowLength,ResourceLocation modelTexture,ItemStack material,ItemStack block,boolean useCheapRecipe,boolean overrideCenter, Object... alternateCenters)
     {
         this.typeName = typeName;
         this.size = size;
@@ -40,16 +42,22 @@ public class ChestTypes {
         this.material = material.copy();
         this.block = block.copy();
         this.useCheapRecipe = useCheapRecipe;
+        this.overrideCenter = overrideCenter;
+        this.alternateCenters = new ItemStack[alternateCenters.length];
+        for (int i=0;i<alternateCenters.length;i++)
+        {
+            this.alternateCenters[i] = ((ItemStack)alternateCenters[i]).copy();
+        }
     }
 
-    public static void addType(String typeName,int size,boolean isExpResistant,ResourceLocation guiLocation,int width,int height,int rowCount,int rowLength,ResourceLocation modelTexture,ItemStack material,ItemStack block,boolean useCheapRecipe)
+    public static void addType(String typeName,int size,boolean isExpResistant,ResourceLocation guiLocation,int width,int height,int rowCount,int rowLength,ResourceLocation modelTexture,ItemStack material,ItemStack block,boolean useCheapRecipe,boolean overrideCenter,Object... alternateCenters)
     {
         if (ChestTypes.getTypeByName(typeName)!=null)
         {
             LogHelper.error("Error! Chest type: " + typeName + " has already been registered! Skipping!");
             return;
         }
-        ChestTypes type = new ChestTypes(typeName,size,isExpResistant,guiLocation,width,height,rowCount,rowLength,modelTexture,material,block,useCheapRecipe);
+        ChestTypes type = new ChestTypes(typeName,size,isExpResistant,guiLocation,width,height,rowCount,rowLength,modelTexture,material,block,useCheapRecipe,overrideCenter,alternateCenters);
         allTypes.add(type);
     }
 
@@ -126,12 +134,25 @@ public class ChestTypes {
 
     private void regRecipe(boolean cheap)
     {
-        if (cheap)
-        {
-            GameRegistry.addRecipe(this.getBlock(), " m ", " c ", " m ", 'm', this.getMaterial(), 'c', Blocks.chest);
+        if (cheap) {
+            if (!overrideCenter) {
+                GameRegistry.addRecipe(this.getBlock(), " m ", " c ", " m ", 'm', this.getMaterial(), 'c', Blocks.chest);
+            }
+            for (ItemStack center : alternateCenters)
+            {
+                GameRegistry.addRecipe(this.getBlock(), " m ", " c ", " m ", 'm', this.getMaterial(), 'c', center);
+            }
         }
+
         else {
-            GameRegistry.addRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', this.getMaterial(), 'c', Blocks.chest);
+            if (!overrideCenter)
+            {
+                GameRegistry.addRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', this.getMaterial(), 'c', Blocks.chest);
+            }
+            for (ItemStack center : alternateCenters)
+            {
+                GameRegistry.addRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', this.getMaterial(), 'c', center);
+            }
         }
     }
 
