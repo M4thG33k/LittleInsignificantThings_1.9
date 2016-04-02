@@ -12,6 +12,6 @@ public class InitChestTypes {
 
     public static void createChestTypes()
     {
-        ChestTypes.addType("Improved",36,false,new ResourceLocation("lit","textures/gui/ImprovedChestGui.png"),184,166,4,9,new ResourceLocation("lit","textures/model/ImprovedChest.png"),new ItemStack(Items.flint,1),new ItemStack(Item.getItemFromBlock(ModBlocks.improvedChestBlock),1),true,false);
+        ChestTypes.addType("Improved",36,false,new ResourceLocation("lit","textures/gui/ImprovedChestGui.png"),184,166,4,9,new ResourceLocation("lit","textures/model/ImprovedChest.png"),new ItemStack(Items.flint,1),new ItemStack(Item.getItemFromBlock(ModBlocks.improvedChestBlock),1),true,false,false,"");
     }
 }

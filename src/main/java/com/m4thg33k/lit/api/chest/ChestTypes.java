@@ -5,6 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.ArrayList;
 
@@ -26,9 +27,11 @@ public class ChestTypes {
     private boolean useCheapRecipe;
     private boolean overrideCenter;
     private ItemStack[] alternateCenters;
+    private boolean useOreDictionaryMaterial;
+    private String oreDictionaryMaterial;
 
 
-    public ChestTypes(String typeName, int size, boolean isExpResistant,ResourceLocation guiLocation, int width, int height,int rowCount,int rowLength,ResourceLocation modelTexture,ItemStack material,ItemStack block,boolean useCheapRecipe,boolean overrideCenter, Object... alternateCenters)
+    public ChestTypes(String typeName, int size, boolean isExpResistant,ResourceLocation guiLocation, int width, int height,int rowCount,int rowLength,ResourceLocation modelTexture,ItemStack material,ItemStack block,boolean useCheapRecipe,boolean overrideCenter,boolean useOreDictionaryMaterial, String oreDictionaryMaterial,Object... alternateCenters)
     {
         this.typeName = typeName;
         this.size = size;
@@ -48,16 +51,18 @@ public class ChestTypes {
         {
             this.alternateCenters[i] = ((ItemStack)alternateCenters[i]).copy();
         }
+        this.useOreDictionaryMaterial = useOreDictionaryMaterial;
+        this.oreDictionaryMaterial = oreDictionaryMaterial;
     }
 
-    public static void addType(String typeName,int size,boolean isExpResistant,ResourceLocation guiLocation,int width,int height,int rowCount,int rowLength,ResourceLocation modelTexture,ItemStack material,ItemStack block,boolean useCheapRecipe,boolean overrideCenter,Object... alternateCenters)
+    public static void addType(String typeName,int size,boolean isExpResistant,ResourceLocation guiLocation,int width,int height,int rowCount,int rowLength,ResourceLocation modelTexture,ItemStack material,ItemStack block,boolean useCheapRecipe,boolean overrideCenter,boolean useOreDictionaryMaterial,String oreDictionaryMaterial,Object... alternateCenters)
     {
         if (ChestTypes.getTypeByName(typeName)!=null)
         {
             LogHelper.error("Error! Chest type: " + typeName + " has already been registered! Skipping!");
             return;
         }
-        ChestTypes type = new ChestTypes(typeName,size,isExpResistant,guiLocation,width,height,rowCount,rowLength,modelTexture,material,block,useCheapRecipe,overrideCenter,alternateCenters);
+        ChestTypes type = new ChestTypes(typeName,size,isExpResistant,guiLocation,width,height,rowCount,rowLength,modelTexture,material,block,useCheapRecipe,overrideCenter,useOreDictionaryMaterial,oreDictionaryMaterial,alternateCenters);
         allTypes.add(type);
     }
 
@@ -127,31 +132,27 @@ public class ChestTypes {
         return block;
     }
 
-    public boolean isUseCheapRecipe()
+    private void regRecipe()
     {
-        return useCheapRecipe;
-    }
-
-    private void regRecipe(boolean cheap)
-    {
-        if (cheap) {
+        Object mat = this.useOreDictionaryMaterial ? this.oreDictionaryMaterial : this.getMaterial();
+        if (this.useCheapRecipe) {
             if (!overrideCenter) {
-                GameRegistry.addRecipe(this.getBlock(), " m ", " c ", " m ", 'm', this.getMaterial(), 'c', Blocks.chest);
+                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "m", "c", "m", 'm', mat, 'c', "chestWood"));// Blocks.chest);
             }
             for (ItemStack center : alternateCenters)
             {
-                GameRegistry.addRecipe(this.getBlock(), " m ", " c ", " m ", 'm', this.getMaterial(), 'c', center);
+                GameRegistry.addRecipe(this.getBlock(), "m", "c", "m", 'm', mat, 'c', center);
             }
         }
 
         else {
             if (!overrideCenter)
             {
-                GameRegistry.addRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', this.getMaterial(), 'c', Blocks.chest);
+                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', mat, 'c', "chestWood"));// Blocks.chest);
             }
             for (ItemStack center : alternateCenters)
             {
-                GameRegistry.addRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', this.getMaterial(), 'c', center);
+                GameRegistry.addRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', mat, 'c', center);
             }
         }
     }
@@ -160,7 +161,7 @@ public class ChestTypes {
     {
         for (ChestTypes type: allTypes)
         {
-            type.regRecipe(type.isUseCheapRecipe());
+            type.regRecipe();
         }
     }
 }

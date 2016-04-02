@@ -24,8 +24,10 @@ public class FurnaceTypes {
     private ItemStack material;
     private boolean overrideFurnace;
     private ItemStack[] alternateCenter;
+    private boolean useOreDictionaryRecipe;
+    private String oreDictionaryMat;
 
-    public FurnaceTypes(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material,boolean overrideFurnace,Object... alternateCenter)
+    public FurnaceTypes(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material,boolean overrideFurnace,boolean useOreDictionaryRecipe,String oreDictionaryMat,Object... alternateCenter)
     {
         this.typeName = typeName;
         this.cookTimeFactor = cookTimeFactor;
@@ -40,11 +42,13 @@ public class FurnaceTypes {
         {
             this.alternateCenter[i] = ((ItemStack)alternateCenter[i]).copy();
         }
+        this.useOreDictionaryRecipe = useOreDictionaryRecipe;
+        this.oreDictionaryMat = oreDictionaryMat;
     }
 
-    public static void addType(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material,boolean overrideFurnace, Object... alternateCenter)
+    public static void addType(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material,boolean overrideFurnace,boolean useOreDictionaryRecipe,String oreDictionaryMat, Object... alternateCenter)
     {
-        FurnaceTypes type = new FurnaceTypes(typeName, cookTimeFactor, upgradeCount, fuelBooster, maxFuel,block,material,overrideFurnace,alternateCenter);
+        FurnaceTypes type = new FurnaceTypes(typeName, cookTimeFactor, upgradeCount, fuelBooster, maxFuel,block,material,overrideFurnace,useOreDictionaryRecipe,oreDictionaryMat,alternateCenter);
         allTypes.add(type);
     }
 
@@ -95,13 +99,14 @@ public class FurnaceTypes {
 
     public void registerRecipe()
     {
+        Object mat = this.useOreDictionaryRecipe ? this.oreDictionaryMat : this.material;
         if (!overrideFurnace)
         {
-            GameRegistry.addRecipe(block," m "," f "," m ",'f', Blocks.furnace,'m',material);
+            GameRegistry.addRecipe(block,"m","f","m",'f', Blocks.furnace,'m',mat);
         }
         for (ItemStack center : alternateCenter)
         {
-            GameRegistry.addRecipe(block," m "," f "," m ",'f',center,'m',material);
+            GameRegistry.addRecipe(block,"m","f","m",'f',center,'m',mat);
         }
     }
 }
