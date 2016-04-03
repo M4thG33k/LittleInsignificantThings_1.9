@@ -3,6 +3,7 @@ package com.m4thg33k.lit.api.furnace;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.ArrayList;
 
@@ -21,13 +22,11 @@ public class FurnaceTypes {
     private double fuelBooster;
     private int maxFuel;
     private ItemStack block;
-    private ItemStack material;
+    private Object material;
     private boolean overrideFurnace;
-    private ItemStack[] alternateCenter;
-    private boolean useOreDictionaryRecipe;
-    private String oreDictionaryMat;
+    private Object[] alternateCenter;
 
-    public FurnaceTypes(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material,boolean overrideFurnace,boolean useOreDictionaryRecipe,String oreDictionaryMat,Object... alternateCenter)
+    public FurnaceTypes(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, Object material,boolean overrideFurnace,Object... alternateCenter)
     {
         this.typeName = typeName;
         this.cookTimeFactor = cookTimeFactor;
@@ -37,18 +36,13 @@ public class FurnaceTypes {
         this.material = material;
         this.block = block;
         this.overrideFurnace = overrideFurnace;
-        this.alternateCenter = new ItemStack[alternateCenter.length];
-        for (int i=0;i<alternateCenter.length;i++)
-        {
-            this.alternateCenter[i] = ((ItemStack)alternateCenter[i]).copy();
-        }
-        this.useOreDictionaryRecipe = useOreDictionaryRecipe;
-        this.oreDictionaryMat = oreDictionaryMat;
+        this.alternateCenter = new Object[alternateCenter.length];
+        System.arraycopy(alternateCenter,0,this.alternateCenter,0,alternateCenter.length);
     }
 
-    public static void addType(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, ItemStack material,boolean overrideFurnace,boolean useOreDictionaryRecipe,String oreDictionaryMat, Object... alternateCenter)
+    public static void addType(String typeName, double cookTimeFactor, int upgradeCount, double fuelBooster, int maxFuel, ItemStack block, Object material,boolean overrideFurnace, Object... alternateCenter)
     {
-        FurnaceTypes type = new FurnaceTypes(typeName, cookTimeFactor, upgradeCount, fuelBooster, maxFuel,block,material,overrideFurnace,useOreDictionaryRecipe,oreDictionaryMat,alternateCenter);
+        FurnaceTypes type = new FurnaceTypes(typeName, cookTimeFactor, upgradeCount, fuelBooster, maxFuel,block,material,overrideFurnace,alternateCenter);
         allTypes.add(type);
     }
 
@@ -99,14 +93,13 @@ public class FurnaceTypes {
 
     public void registerRecipe()
     {
-        Object mat = this.useOreDictionaryRecipe ? this.oreDictionaryMat : this.material;
         if (!overrideFurnace)
         {
-            GameRegistry.addRecipe(block,"m","f","m",'f', Blocks.furnace,'m',mat);
+            GameRegistry.addRecipe(new ShapedOreRecipe(block,"m","f","m",'f', Blocks.furnace,'m',material));
         }
-        for (ItemStack center : alternateCenter)
+        for (Object center : alternateCenter)
         {
-            GameRegistry.addRecipe(block,"m","f","m",'f',center,'m',mat);
+            GameRegistry.addRecipe(new ShapedOreRecipe(block,"m","f","m",'f',center,'m',material));
         }
     }
 }
