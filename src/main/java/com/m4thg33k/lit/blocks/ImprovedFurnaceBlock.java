@@ -104,6 +104,7 @@ public class ImprovedFurnaceBlock extends BaseBlock {
         TileImprovedFurnace te = (TileImprovedFurnace)worldIn.getTileEntity(pos);
 
         InventoryHelper.dropInventoryItems(worldIn,pos,te);
+        te.dropUpgrades(worldIn,pos);
         super.breakBlock(worldIn, pos, state);
     }
 }
