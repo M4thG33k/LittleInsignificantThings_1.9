@@ -4,4 +4,6 @@ public class Names {
 
     public static final String IMPROVED_FURNACE = "ImprovedFurnaceBlock";
     public static final String IMPROVED_CHEST = "ImprovedChestBlock";
+
+    public static final String FURNACE_UPGRADE = "FurnaceUpgradeItem";
 }

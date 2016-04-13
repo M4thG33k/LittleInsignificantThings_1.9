@@ -1,7 +1,6 @@
 package com.m4thg33k.lit.blocks;
 
 import com.m4thg33k.lit.LIT;
-import com.m4thg33k.lit.api.LitStateProps;
 import com.m4thg33k.lit.api.chest.ChestTypes;
 import com.m4thg33k.lit.gui.LitGuiHandler;
 import com.m4thg33k.lit.lib.Names;
@@ -40,6 +39,14 @@ public class ImprovedChestBlock extends BlockContainer{
         this.setHardness(3.0f);
         this.setUnlocalizedName(Names.IMPROVED_CHEST);
         this.setCreativeTab(LIT.tabLIT);
+
+        handleRegName();
+
+    }
+
+    protected void handleRegName()
+    {
+        this.setRegistryName(LIT.MODID,Names.IMPROVED_CHEST);
     }
 
     @Override

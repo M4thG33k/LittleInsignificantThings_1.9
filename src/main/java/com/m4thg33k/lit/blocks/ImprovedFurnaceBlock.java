@@ -29,6 +29,13 @@ public class ImprovedFurnaceBlock extends BaseBlock {
         super(Names.IMPROVED_FURNACE, Material.rock,2.0f,5.0f);
 
         this.setDefaultState(this.blockState.getBaseState().withProperty(LitStateProps.CARDINALS, EnumFacing.NORTH).withProperty(ON,false));
+
+        handleRegName();
+    }
+
+    protected void handleRegName()
+    {
+        this.setRegistryName(LIT.MODID,Names.IMPROVED_FURNACE);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.m4thg33k.lit.core.init.InitChestTypes;
 import com.m4thg33k.lit.core.init.InitFurnaceTypes;
 import com.m4thg33k.lit.core.init.ModRecipes;
 import com.m4thg33k.lit.gui.LitGuiHandler;
+import com.m4thg33k.lit.items.ModItems;
 import com.m4thg33k.lit.network.packets.LITPackets;
 import com.m4thg33k.lit.network.packets.PacketNBT;
 import com.m4thg33k.lit.tiles.ModTiles;
@@ -19,6 +20,7 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent e)
     {
         LITPackets.init();
+        ModItems.createItems();
         ModBlocks.createBlocks();
         InitFurnaceTypes.createFurnaceTypes();
         InitChestTypes.createChestTypes();

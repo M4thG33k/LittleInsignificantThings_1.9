@@ -11,3 +11,10 @@ itemGroup.tabLIT=LIT
 #-------------------------------------------------------------------
 tile.ImprovedFurnaceBlock.name=Improved Furnace
 tile.ImprovedChestBlock.name=Improved Chest
+
+#-------------------------------------------------------------------
+# Items
+#-------------------------------------------------------------------
+item.FurnaceUpgradeItem_0.name=Processing Upgrade
+item.FurnaceUpgradeItem_1.name=Fuel Boost Upgrade
+item.FurnaceUpgradeItem_2.name=Capacity Upgrade
