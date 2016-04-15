@@ -30,11 +30,10 @@ public class ImprovedFurnaceBlock extends BaseBlock {
 
         this.setDefaultState(this.blockState.getBaseState().withProperty(LitStateProps.CARDINALS, EnumFacing.NORTH).withProperty(ON,false));
 
-        handleRegName();
     }
 
-    protected void handleRegName()
-    {
+    @Override
+    public void handleRegName() {
         this.setRegistryName(LIT.MODID,Names.IMPROVED_FURNACE);
     }
 
@@ -42,11 +41,6 @@ public class ImprovedFurnaceBlock extends BaseBlock {
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this,LitStateProps.CARDINALS,ON);
     }
-
-
-    //    protected BlockState createBlockState() {
-//        return new BlockState(this,LitStateProps.CARDINALS,ON);
-//    }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {

@@ -1,8 +1,10 @@
 package com.m4thg33k.lit.blocks;
 
 import com.m4thg33k.lit.LIT;
+import com.m4thg33k.lit.api.LitStateProps;
 import com.m4thg33k.lit.api.chest.ChestTypes;
 import com.m4thg33k.lit.gui.LitGuiHandler;
+import com.m4thg33k.lit.lib.IExtendable;
 import com.m4thg33k.lit.lib.Names;
 import com.m4thg33k.lit.tiles.TileImprovedChest;
 import net.minecraft.block.BlockContainer;
@@ -27,7 +29,7 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class ImprovedChestBlock extends BlockContainer{
+public class ImprovedChestBlock extends BlockContainer implements IExtendable{
 
     public ImprovedChestBlock()
     {
@@ -40,12 +42,11 @@ public class ImprovedChestBlock extends BlockContainer{
         this.setUnlocalizedName(Names.IMPROVED_CHEST);
         this.setCreativeTab(LIT.tabLIT);
 
-        handleRegName();
-
+        this.handleRegName();
     }
 
-    protected void handleRegName()
-    {
+    @Override
+    public void handleRegName() {
         this.setRegistryName(LIT.MODID,Names.IMPROVED_CHEST);
     }
 

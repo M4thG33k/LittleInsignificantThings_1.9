@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_bottom_top",
+    "transform": "forge:default-block",
+    "textures": {
+      "side": "lit:blocks/ImprovedCraftingTableSide",
+      "top": "lit:blocks/ImprovedCraftingTableTop",
+      "bottom": "lit:blocks/ImprovedFurnaceBlock"
+    }
+  },
+  "variants": {
+    "normal": [{
+      "textures": {
+        "side": "lit:blocks/ImprovedCraftingTableSide",
+        "top": "lit:blocks/ImprovedCraftingTableTop",
+        "bottom": "lit:blocks/ImprovedFurnaceBlock"
+      }
+    }],
+    "inventory": [{
+      "textures": {
+        "side": "lit:blocks/ImprovedCraftingTableSide",
+        "top": "lit:blocks/ImprovedCraftingTableTop",
+        "bottom": "lit:blocks/ImprovedFurnaceBlock"
+      }
+    }]
+  }
+}

@@ -5,12 +5,14 @@ itemGroup.tabLIT=LIT
 #-------------------------------------------------------------------
 # Containers
 #-------------------------------------------------------------------
+container.ImprovedCraftingTableBlock=Improved Crafting Table
 
 #-------------------------------------------------------------------
 # Blocks
 #-------------------------------------------------------------------
 tile.ImprovedFurnaceBlock.name=Improved Furnace
 tile.ImprovedChestBlock.name=Improved Chest
+tile.ImprovedCraftingTableBlock.name=Improved Crafting Table
 
 #-------------------------------------------------------------------
 # Items
