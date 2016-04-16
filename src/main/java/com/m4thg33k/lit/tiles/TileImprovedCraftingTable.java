@@ -3,11 +3,14 @@ package com.m4thg33k.lit.tiles;
 import com.m4thg33k.lit.blocks.ModBlocks;
 import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.inventory.ContainerImprovedCraftingTable;
+import com.m4thg33k.lit.inventory.LITInventoryCrafting;
+import com.m4thg33k.lit.lib.IHasResult;
 import com.m4thg33k.lit.lib.Names;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
@@ -22,9 +25,11 @@ import net.minecraft.util.text.TextComponentString;
 
 import java.util.List;
 
-public class TileImprovedCraftingTable extends TileEntity implements ITickable,IInventory,ISidedInventory{
+public class TileImprovedCraftingTable extends TileEntity implements ITickable,IInventory,ISidedInventory,IHasResult{
 
     private ItemStack[] craftingGrid = new ItemStack[9];
+
+    private ItemStack result;
 
     protected int ticksSinceSync = -1;
 
@@ -90,15 +95,21 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
+//        LogHelper.info("Setting contents in " + index + " on " + (worldObj.isRemote ? "client " : "server ") + "side!");
         if (index<0 || index>=9)
         {
             return;
         }
         craftingGrid[index] = stack;
+        if (stack!=null && stack.stackSize<=0)
+        {
+            craftingGrid[index] = null;
+        }
         if (stack!=null && stack.stackSize>getInventoryStackLimit())
         {
             stack.stackSize = getInventoryStackLimit();
         }
+        syncInventories();
         markDirty();
     }
 
@@ -211,6 +222,14 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
             inventoryTouched = false;
         }
 
+        LITInventoryCrafting crafting = new LITInventoryCrafting(3,3);
+        for (int i=0;i<9;i++)
+        {
+            crafting.setInventorySlotContents(i,craftingGrid[i]);
+        }
+
+        setResult(CraftingManager.getInstance().findMatchingRecipe(crafting,worldObj));
+
         this.ticksSinceSync++;
     }
 
@@ -315,9 +334,10 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
         {
             NBTTagCompound stackTag = list.getCompoundTagAt(i);
             int slot = stackTag.getByte("Slot") & 0xff;
+//            LogHelper.info("Writing data to slot: " + slot);
             if (slot>0 && slot<getSizeInventory())
             {
-                craftingGrid[slot].readFromNBT(stackTag);
+                craftingGrid[slot] = ItemStack.loadItemStackFromNBT(stackTag);
             }
         }
     }
@@ -326,5 +346,23 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
     {
         this.worldObj.markAndNotifyBlock(pos,null,worldObj.getBlockState(pos),worldObj.getBlockState(pos),3);
 //        LogHelper.info("Syncing!");
+    }
+
+    @Override
+    public ItemStack getResult()
+    {
+        return result;
+    }
+
+    @Override
+    public void setResult(ItemStack stack)
+    {
+        if (stack==null)
+        {
+            result=null;
+        }
+        else{
+            result = stack.copy();
+        }
     }
 }

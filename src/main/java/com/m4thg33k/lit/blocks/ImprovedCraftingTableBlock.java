@@ -1,6 +1,7 @@
 package com.m4thg33k.lit.blocks;
 
 import com.m4thg33k.lit.LIT;
+import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.gui.LitGuiHandler;
 import com.m4thg33k.lit.lib.Names;
 import com.m4thg33k.lit.tiles.TileImprovedCraftingTable;
@@ -13,6 +14,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class ImprovedCraftingTableBlock extends BaseBlock{
@@ -31,6 +33,20 @@ public class ImprovedCraftingTableBlock extends BaseBlock{
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote)
         {
+            if (playerIn.isSneaking())
+            {
+                TileImprovedCraftingTable tile = (TileImprovedCraftingTable)worldIn.getTileEntity(pos);
+                int n=0;
+                for (int i=0;i<9;i++)
+                {
+                    if (tile.getStackInSlot(i)!=null)
+                    {
+                        n++;
+                    }
+                }
+                LogHelper.info("Tile has " + n + " non-empty slots");
+                return true;
+            }
             playerIn.openGui(LIT.instance, LitGuiHandler.IMPROVED_CRAFTING_TABLE,worldIn,pos.getX(),pos.getY(),pos.getZ());
         }
 
@@ -58,4 +74,26 @@ public class ImprovedCraftingTableBlock extends BaseBlock{
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
+
+    @Override
+    public boolean isBlockNormalCube(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean isNormalCube(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+
 }

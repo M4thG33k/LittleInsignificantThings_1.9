@@ -1,6 +1,7 @@
 package com.m4thg33k.lit.inventory;
 
 import com.m4thg33k.lit.blocks.ModBlocks;
+import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.tiles.TileImprovedCraftingTable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,18 +16,20 @@ public class ContainerImprovedCraftingTable extends Container {
     public InventoryCrafting craftMatrix = new InventoryCrafting(this,3,3);
     public IInventory craftResult = new InventoryCraftResult();
 
+    private ItemStack[] items = new ItemStack[9];
+
 
     public ContainerImprovedCraftingTable(InventoryPlayer playerInventory, TileImprovedCraftingTable tileEntity)
     {
         te = tileEntity;
 
-        this.addSlotToContainer(new SlotCrafting(playerInventory.player,this.craftMatrix,this.craftResult,0,124,35));
+        this.addSlotToContainer(new SlotCraftingLinked(playerInventory.player,this.craftMatrix,this.craftResult,0,124,35,te,0,9));
 
         for (int i=0;i<3;i++)
         {
             for (int j=0;j<3;j++)
             {
-                this.addSlotToContainer(new Slot(this.craftMatrix,j+i*3,30+j*18,17+i*18));
+                this.addSlotToContainer(new SlotLinked(this.craftMatrix,j+i*3,30+j*18,17+i*18,te,j+i*3));
             }
         }
 
@@ -43,7 +46,8 @@ public class ContainerImprovedCraftingTable extends Container {
             this.addSlotToContainer(new Slot(playerInventory, l, 8 + l * 18, 142));
         }
 
-        syncInventories(false);
+
+
 
         this.onCraftMatrixChanged(this.craftMatrix);
 
@@ -51,15 +55,13 @@ public class ContainerImprovedCraftingTable extends Container {
 
     @Override
     public void onCraftMatrixChanged(IInventory inventoryIn) {
+//        LogHelper.info("Crafting change");
         this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix,this.te.getWorld()));
-        this.syncInventories(true);
-        te.syncInventories();
     }
 
     @Override
     public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
-        syncInventories(true);
         te.closeInventory(playerIn);
     }
 
@@ -123,12 +125,15 @@ public class ContainerImprovedCraftingTable extends Container {
             slot.onPickupFromSlot(playerIn,itemStack);
         }
 
-        this.syncInventories(true);
         return stack;
     }
 
     protected void syncInventories(boolean toTile)
     {
+//        if (!te.getWorld().isRemote)
+//        {
+//            LogHelper.info("Syncing " + (toTile ? "to" : "from") + " the tile!");
+//        }
         if (toTile)
         {
             for (int i=0;i<9;i++)
@@ -145,8 +150,86 @@ public class ContainerImprovedCraftingTable extends Container {
         }
     }
 
+    protected void syncContainerOnServerSide()
+    {
+        if (!te.getWorld().isRemote)
+        {
+            for (int i=0;i<9;i++)
+            {
+                te.setInventorySlotContents(i,inventorySlots.get(1+i).getStack());
+            }
+            te.syncInventories();
+        }
+    }
+
+    protected void loadDataFromTile()
+    {
+        for (int i=0;i<9;i++)
+        {
+            inventorySlots.get(1+i).putStack(te.getStackInSlot(i));
+        }
+    }
+
     @Override
     public boolean canMergeSlot(ItemStack stack, Slot slotIn) {
         return slotIn.inventory != this.craftResult && super.canMergeSlot(stack,slotIn);
     }
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+
+//        for (int i=0;i<this.crafters.size();i++)
+//        {
+//            ICrafting iCrafting = this.crafters.get(i);
+//
+//            boolean needUpdate = false;
+//
+//            for (int j=0;j<9;j++)
+//            {
+//                if (!ItemStack.areItemStacksEqual(items[j],te.getStackInSlot(j)))
+//                {
+//                    LogHelper.info("Needs update!");
+//                    needUpdate = true;
+//                    break;
+//                }
+//            }
+//            if (needUpdate)
+//            {
+//                iCrafting.sendProgressBarUpdate(this,0,0);
+//            }
+//        }
+//
+//        for (int j=0;j<9;j++)
+//        {
+//            if (te.getStackInSlot(j)!=null)
+//            {
+//                items[j] = te.getStackInSlot(j).copy();
+//            }
+//            else
+//            {
+//                items[j] = null;
+//            }
+//        }
+    }
+
+    @Override
+    public void onCraftGuiOpened(ICrafting listener) {
+        super.onCraftGuiOpened(listener);
+        syncInventories(false);
+//        listener.sendProgressBarUpdate(this,0,0);
+    }
+
+    @Override
+    public void updateProgressBar(int id, int data) {
+        switch(id)
+        {
+            case 0:
+                this.te.getWorld().markAndNotifyBlock(this.te.getPos(),null,this.te.getWorld().getBlockState(this.te.getPos()),this.te.getWorld().getBlockState(this.te.getPos()),3);
+                break;
+            default:
+        }
+    }
+
+
 }
