@@ -17,7 +17,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //for JEI stuff
 repositories {
     maven {
-        url "http://dvs1.progwm.com/files/maven"
+        url "http://dvs1.progwml6.com/files/maven"
     }
 }
 //end for JEI stuff
