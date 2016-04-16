@@ -5,6 +5,7 @@ import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.gui.LitGuiHandler;
 import com.m4thg33k.lit.lib.Names;
 import com.m4thg33k.lit.tiles.TileImprovedCraftingTable;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
@@ -21,7 +22,12 @@ public class ImprovedCraftingTableBlock extends BaseBlock{
 
     public ImprovedCraftingTableBlock()
     {
-        super(Names.IMPROVED_CRAFTING_TABLE);
+        super(Names.IMPROVED_CRAFTING_TABLE, Material.ground,2.75f,10.0f);
+    }
+
+    @Override
+    public boolean isToolEffective(String type, IBlockState state) {
+        return (type.equals("pickaxe") || type.equals("axe"));
     }
 
     @Override
