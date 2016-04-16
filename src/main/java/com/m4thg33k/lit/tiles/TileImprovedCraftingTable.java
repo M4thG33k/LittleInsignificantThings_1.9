@@ -1,6 +1,7 @@
 package com.m4thg33k.lit.tiles;
 
 import com.m4thg33k.lit.blocks.ModBlocks;
+import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.inventory.ContainerImprovedCraftingTable;
 import com.m4thg33k.lit.lib.Names;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +10,9 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -208,7 +212,6 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
         }
 
         this.ticksSinceSync++;
-
     }
 
     @Override
@@ -282,5 +285,46 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
     @Override
     public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) {
         return false;
+    }
+
+    @Override
+    public Packet<?> getDescriptionPacket() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        NBTTagList list = new NBTTagList();
+        for (int i=0;i<craftingGrid.length;i++)
+        {
+            if (getStackInSlot(i)!=null)
+            {
+                NBTTagCompound stackTag = new NBTTagCompound();
+                stackTag.setByte("Slot",(byte)i);
+                craftingGrid[i].writeToNBT(stackTag);
+                list.appendTag(stackTag);
+            }
+        }
+        nbt.setTag("Items",list);
+
+//        LogHelper.info("Created list with " + list.tagCount() + " items!");
+
+        return new SPacketUpdateTileEntity(pos,0,nbt);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        NBTTagList list = pkt.getNbtCompound().getTagList("Items",10);
+        for (int i=0;i<list.tagCount();i++)
+        {
+            NBTTagCompound stackTag = list.getCompoundTagAt(i);
+            int slot = stackTag.getByte("Slot") & 0xff;
+            if (slot>0 && slot<getSizeInventory())
+            {
+                craftingGrid[slot].readFromNBT(stackTag);
+            }
+        }
+    }
+
+    public void syncInventories()
+    {
+        this.worldObj.markAndNotifyBlock(pos,null,worldObj.getBlockState(pos),worldObj.getBlockState(pos),3);
+//        LogHelper.info("Syncing!");
     }
 }

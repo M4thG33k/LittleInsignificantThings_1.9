@@ -52,6 +52,8 @@ public class ContainerImprovedCraftingTable extends Container {
     @Override
     public void onCraftMatrixChanged(IInventory inventoryIn) {
         this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix,this.te.getWorld()));
+        this.syncInventories(true);
+        te.syncInventories();
     }
 
     @Override
@@ -85,7 +87,7 @@ public class ContainerImprovedCraftingTable extends Container {
 
                 slot.onSlotChange(itemStack,stack);
             }
-            else if (index>=0 && index<37) //main inventory
+            else if (index>=9 && index<37) //main inventory
             {
                 if (!this.mergeItemStack(itemStack,37,46,false))
                 {
