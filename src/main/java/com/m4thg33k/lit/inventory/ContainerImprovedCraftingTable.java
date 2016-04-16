@@ -1,5 +1,6 @@
 package com.m4thg33k.lit.inventory;
 
+import com.m4thg33k.lit.blocks.ImprovedCraftingTableBlock;
 import com.m4thg33k.lit.blocks.ModBlocks;
 import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.tiles.TileImprovedCraftingTable;
@@ -67,7 +68,7 @@ public class ContainerImprovedCraftingTable extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
-        return this.te.getWorld().getBlockState(te.getPos()).getBlock() == ModBlocks.improvedCraftingTableBlock && playerIn.getDistanceSq(te.getPos().add(0.5,0.5,0.5)) <= 64;
+        return this.te.getWorld().getBlockState(te.getPos()).getBlock() instanceof ImprovedCraftingTableBlock && playerIn.getDistanceSq(te.getPos().add(0.5,0.5,0.5)) <= 64;
     }
 
     @Override
