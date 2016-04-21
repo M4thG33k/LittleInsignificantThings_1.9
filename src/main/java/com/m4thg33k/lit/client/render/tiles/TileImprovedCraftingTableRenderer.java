@@ -53,7 +53,8 @@ public class TileImprovedCraftingTableRenderer extends TileEntitySpecialRenderer
         if (stack!=null)
         {
 //            LogHelper.info("Rendering index: " + index);
-            ItemStack single = new ItemStack(stack.getItem(),1,stack.getItemDamage());
+            ItemStack single = stack.copy();
+            single.stackSize = 1;// new ItemStack(stack.getItem(),1,stack.getItemDamage());
 
             EntityItem entityItem = new EntityItem(world,0.0d,0.0d,0.0d,single);
             entityItem.getEntityItem().stackSize = 1;
