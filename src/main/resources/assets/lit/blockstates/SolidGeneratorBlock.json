@@ -1,0 +1,31 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:orientable",
+    "transform": "forge:default-block",
+    "textures": {
+      "side": "lit:blocks/SolidGeneratorSides",
+      "top": "lit:blocks/SolidGeneratorTop"
+    }
+  },
+  "variants": {
+    "facing": {
+      "north" : {},
+      "south": {"y": 180},
+      "west": {"y": 270},
+      "east": {"y": 90}
+    },
+    "on": {
+      "true": {
+        "textures": {
+          "front": "lit:blocks/SolidGeneratorFront_On"
+        }
+      },
+      "false": {
+        "textures": {
+          "front": "lit:blocks/SolidGeneratorFront"
+        }
+      }
+    }
+  }
+}

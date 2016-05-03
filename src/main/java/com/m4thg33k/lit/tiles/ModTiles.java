@@ -11,5 +11,6 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileImprovedFurnace.class,prefix + Names.IMPROVED_FURNACE);
         GameRegistry.registerTileEntity(TileImprovedChest.class,prefix + Names.IMPROVED_CHEST);
         GameRegistry.registerTileEntity(TileImprovedCraftingTable.class,prefix+Names.IMPROVED_CRAFTING_TABLE);
+        GameRegistry.registerTileEntity(TileSolidGenerator.class,prefix+Names.SOLID_GENERATOR);
     }
 }

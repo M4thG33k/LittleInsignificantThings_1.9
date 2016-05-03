@@ -19,6 +19,10 @@ public class ItemRenderRegister {
 
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.improvedCraftingTableBlock),0,new ModelResourceLocation(LIT.MODID+":"+Names.IMPROVED_CRAFTING_TABLE,"inventory"));
 
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.solidGeneratorBlock),0,new ModelResourceLocation(LIT.MODID+":"+Names.SOLID_GENERATOR,"facing=north,on=false"));
+
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ModBlocks.charcoalBlock),0,new ModelResourceLocation(LIT.MODID+":"+Names.CHARCOAL_BLOCK,"inventory"));
+
         //items
         for (int i=0;i<3;i++)
         {

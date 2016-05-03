@@ -37,6 +37,8 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
     protected boolean inventoryTouched;
     protected String customName;
 
+    protected EnumFacing facing = EnumFacing.NORTH;
+
     public TileImprovedCraftingTable()
     {
         super();
@@ -245,6 +247,11 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
             this.customName = compound.getString("CustomName");
         }
 
+        if (compound.hasKey("Facing"))
+        {
+            facing = EnumFacing.values()[compound.getInteger("Facing")];
+        }
+
         for (int i=0;i<list.tagCount();i++)
         {
             NBTTagCompound stackTag = list.getCompoundTagAt(i);
@@ -271,6 +278,8 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
             }
         }
         compound.setTag("Items",list);
+
+        compound.setInteger("Facing",facing.ordinal());
 
         if (this.hasCustomName())
         {
@@ -322,6 +331,8 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
         }
         nbt.setTag("Items",list);
 
+        nbt.setInteger("Facing",facing.ordinal());
+
 //        LogHelper.info("Created list with " + list.tagCount() + " items!");
 
         return new SPacketUpdateTileEntity(pos,0,nbt);
@@ -340,6 +351,8 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
                 craftingGrid[slot] = ItemStack.loadItemStackFromNBT(stackTag);
             }
         }
+
+        facing = EnumFacing.values()[pkt.getNbtCompound().getInteger("Facing")];
     }
 
     public void syncInventories()
@@ -364,5 +377,15 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
         else{
             result = stack.copy();
         }
+    }
+
+    public void setFacing(EnumFacing face)
+    {
+        this.facing = face;
+    }
+
+    public EnumFacing getFacing()
+    {
+        return facing;
     }
 }

@@ -10,6 +10,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GuiImprovedFurnace extends GuiContainer {
 
     private TileImprovedFurnace tileImprovedFurnace;
@@ -52,14 +55,20 @@ public class GuiImprovedFurnace extends GuiContainer {
         String percent = "Fuel Level At: " + perc + "%.";
         smelt = String.format(smelt,((ContainerImprovedFurnace)this.inventorySlots).getNumSmeltable);
 
-        int textWidth = this.fontRendererObj.getStringWidth(smelt);
+        List<String> text = new ArrayList<String>();
+        text.add(percent);
+        text.add(smelt);
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(LIT.MODID+":textures/gui/"+ Names.IMPROVED_FURNACE + ".png"));
-        this.drawTexturedModalRect(mX-textWidth-2,mY-12,0,180,textWidth+4,18);
+        this.drawHoveringText(text,mX,mY);
+
+//        int textWidth = this.fontRendererObj.getStringWidth(smelt);
+
+//        mc.getTextureManager().bindTexture(new ResourceLocation(LIT.MODID+":textures/gui/"+ Names.IMPROVED_FURNACE + ".png"));
+//        this.drawTexturedModalRect(mX-textWidth-2,mY-12,0,180,textWidth+4,18);
 
 //        this.fontRendererObj.drawStringWithShadow(percent,mX-textWidth,mY-10,0x404040);
-        this.fontRendererObj.drawString(percent,mX-textWidth,mY-10,0x404040);
-        this.fontRendererObj.drawString(smelt,mX-textWidth,mY-2,0x404040);
+//        this.fontRendererObj.drawString(percent,mX-textWidth,mY-10,0x404040);
+//        this.fontRendererObj.drawString(smelt,mX-textWidth,mY-2,0x404040);
 //        this.fontRendererObj.drawString("Able to smelt " + ((ContainerImprovedFurnace)this.inventorySlots).getNumSmeltable + " items.",mouseX-w,mouseY-h,0x404040);
     }
 

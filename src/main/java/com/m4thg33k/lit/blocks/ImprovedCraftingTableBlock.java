@@ -7,6 +7,7 @@ import com.m4thg33k.lit.lib.Names;
 import com.m4thg33k.lit.tiles.TileImprovedCraftingTable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -101,5 +102,10 @@ public class ImprovedCraftingTableBlock extends BaseBlock{
         return false;
     }
 
-
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        TileImprovedCraftingTable tile = (TileImprovedCraftingTable)worldIn.getTileEntity(pos);
+        tile.setFacing(placer.getHorizontalFacing().getOpposite());
+    }
 }

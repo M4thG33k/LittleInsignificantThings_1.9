@@ -4,6 +4,7 @@ import com.m4thg33k.lit.LIT;
 import com.m4thg33k.lit.client.render.ModRenders;
 import com.m4thg33k.lit.client.render.registers.BlockRenderRegister;
 import com.m4thg33k.lit.client.render.registers.ItemRenderRegister;
+import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.network.packets.PacketNBT;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -38,7 +39,12 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void handleNBTPacket(PacketNBT pkt) {
         World world = Minecraft.getMinecraft().theWorld;
-        Minecraft.getMinecraft().theWorld.getTileEntity(pkt.pos).readFromNBT(pkt.compound);
-        Minecraft.getMinecraft().theWorld.notifyBlockUpdate(pkt.pos,world.getBlockState(pkt.pos),world.getBlockState(pkt.pos),0);
+        try {
+            Minecraft.getMinecraft().theWorld.getTileEntity(pkt.pos).readFromNBT(pkt.compound);
+            Minecraft.getMinecraft().theWorld.notifyBlockUpdate(pkt.pos, world.getBlockState(pkt.pos), world.getBlockState(pkt.pos), 0);
+        } catch (NullPointerException e)
+        {
+            LogHelper.error("Null pointer issue with tile packet!");
+        }
     }
 }

@@ -6,6 +6,7 @@ itemGroup.tabLIT=LIT
 # Containers
 #-------------------------------------------------------------------
 container.ImprovedCraftingTableBlock=Improved Crafting Table
+container.SolidGeneratorBlock=Solid-Fueled Generator
 
 #-------------------------------------------------------------------
 # Blocks
@@ -13,6 +14,8 @@ container.ImprovedCraftingTableBlock=Improved Crafting Table
 tile.ImprovedFurnaceBlock.name=Improved Furnace
 tile.ImprovedChestBlock.name=Improved Chest
 tile.ImprovedCraftingTableBlock.name=Improved Crafting Table
+tile.SolidGeneratorBlock.name=Solid Fueled Generator
+tile.CharcoalBlock.name=Block of Charcoal
 
 #-------------------------------------------------------------------
 # Items

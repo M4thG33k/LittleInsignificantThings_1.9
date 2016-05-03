@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class TileImprovedCraftingTableRenderer extends TileEntitySpecialRenderer {
@@ -29,12 +30,40 @@ public class TileImprovedCraftingTableRenderer extends TileEntitySpecialRenderer
         }
 
         TileImprovedCraftingTable tile = (TileImprovedCraftingTable)te;
+        EnumFacing facing = tile.getFacing();
+
 
 
         GlStateManager.pushMatrix();
         GlStateManager.color(1.0f,1.0f,1.0f,1.0f);
 
         GlStateManager.translate(x,y,z);
+
+        float rotation;
+
+        switch (facing)
+        {
+            case SOUTH:
+                rotation = 90.0f;
+                GlStateManager.translate(0,0,+1);
+                break;
+            case WEST:
+                rotation = 0.0f;
+                break;
+            case EAST:
+                rotation = 180.0f;
+                GlStateManager.translate(1,0,1);
+                break;
+            case NORTH:
+                rotation = 270.0f;
+                GlStateManager.translate(1,0,0);
+                break;
+            default:
+                rotation = 0.0f;
+        }
+
+        GlStateManager.rotate(rotation,0,1,0);
+
         World world = te.getWorld();
         for (int i=0;i<9;i++)
         {

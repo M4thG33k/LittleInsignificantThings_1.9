@@ -5,6 +5,7 @@ import com.m4thg33k.lit.blocks.ModBlocks;
 import com.m4thg33k.lit.core.init.InitChestTypes;
 import com.m4thg33k.lit.core.init.InitFurnaceTypes;
 import com.m4thg33k.lit.core.init.ModRecipes;
+import com.m4thg33k.lit.core.init.OreDictionaryReg;
 import com.m4thg33k.lit.gui.LitGuiHandler;
 import com.m4thg33k.lit.items.ModItems;
 import com.m4thg33k.lit.lib.LITConfigs;
@@ -15,6 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class CommonProxy {
 
@@ -33,6 +35,7 @@ public class CommonProxy {
         NetworkRegistry.INSTANCE.registerGuiHandler(LIT.instance,new LitGuiHandler());
         ModTiles.init();
         ModRecipes.initRecipes();
+        OreDictionaryReg.init();
     }
 
     public void postInit(FMLPostInitializationEvent e)
