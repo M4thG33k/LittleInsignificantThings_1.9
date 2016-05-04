@@ -3,7 +3,6 @@ package com.m4thg33k.lit.tiles;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
-import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.lib.Names;
 import com.m4thg33k.lit.network.packets.LITPackets;
 import com.m4thg33k.lit.network.packets.PacketNBT;
@@ -139,7 +138,7 @@ public class TileSolidGenerator extends TileEntity implements IEnergyProvider,IT
                 int attempt = te.receiveEnergy(facing.getOpposite(),storage.extractEnergy(ENERGY_PUSH,true),true);
                 if (attempt>0)
                 {
-                    total += te.receiveEnergy(facing.getOpposite(),storage.extractEnergy(ENERGY_PUSH,false),false);
+                    total += te.receiveEnergy(facing.getOpposite(),storage.extractEnergy(attempt,false),false);
                 }
             }
         }
