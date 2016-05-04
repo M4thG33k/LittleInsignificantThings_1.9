@@ -348,7 +348,7 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
             NBTTagCompound stackTag = list.getCompoundTagAt(i);
             int slot = stackTag.getByte("Slot") & 0xff;
 //            LogHelper.info("Writing data to slot: " + slot);
-            if (slot>0 && slot<getSizeInventory())
+            if (slot>=0 && slot<getSizeInventory())
             {
                 craftingGrid[slot] = ItemStack.loadItemStackFromNBT(stackTag);
             }
