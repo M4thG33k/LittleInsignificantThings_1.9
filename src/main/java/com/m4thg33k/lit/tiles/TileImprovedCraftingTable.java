@@ -198,6 +198,7 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
 
     @Override
     public void update() {
+//        LogHelper.info(result==null?"<EMPTY>":result.getDisplayName());
         //resync clients with the server state
         if (worldObj!=null && !this.worldObj.isRemote && this.numUsingPlayers!=0 && (this.ticksSinceSync+pos.getX()+pos.getY()+pos.getZ())%200==0)
         {
@@ -341,6 +342,7 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         NBTTagList list = pkt.getNbtCompound().getTagList("Items",10);
+        craftingGrid = new ItemStack[9];
         for (int i=0;i<list.tagCount();i++)
         {
             NBTTagCompound stackTag = list.getCompoundTagAt(i);
@@ -357,6 +359,10 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
 
     public void syncInventories()
     {
+        if (worldObj.isRemote)
+        {
+            return;
+        }
         this.worldObj.markAndNotifyBlock(pos,null,worldObj.getBlockState(pos),worldObj.getBlockState(pos),3);
 //        LogHelper.info("Syncing!");
     }

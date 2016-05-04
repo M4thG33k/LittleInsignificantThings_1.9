@@ -54,15 +54,17 @@ public class ContainerImprovedCraftingTable extends Container {
 
     }
 
+
+
     @Override
     public void onCraftMatrixChanged(IInventory inventoryIn) {
-//        LogHelper.info("Crafting change");
         this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix,this.te.getWorld()));
     }
 
     @Override
     public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
+//        syncInventories(true);
         te.closeInventory(playerIn);
     }
 
