@@ -167,7 +167,7 @@ public class ImprovedChestBlock extends BlockContainer implements IExtendable{
         TileImprovedChest tile = (TileImprovedChest) worldIn.getTileEntity(pos);
         NBTTagCompound tagCompound = tile.getInventoryNBT();
 
-        ItemStack droppedItem = new ItemStack(this.getItemDropped(state,null,0));
+        ItemStack droppedItem = new ItemStack(this.getItemDropped(state,null,0),1,this.getMetaFromState(state));
         if (tagCompound!=null)
         {
             droppedItem.setTagCompound(tagCompound);

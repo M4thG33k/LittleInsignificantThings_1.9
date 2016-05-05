@@ -1,10 +1,12 @@
 package com.m4thg33k.lit.JEIIntegration;
 
+import com.m4thg33k.lit.blocks.ModBlocks;
 import com.m4thg33k.lit.client.gui.GuiImprovedCraftingTable;
 import com.m4thg33k.lit.inventory.ContainerImprovedCraftingTable;
 import mezz.jei.api.*;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
+import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 
@@ -24,6 +26,7 @@ public class LitPlugin extends BlankModPlugin{
                 "RepairCost",
                 "Unbreakable"
         );
+        jeiHelpers.getNbtIgnoreList().ignoreNbtTagNames(Item.getItemFromBlock(ModBlocks.improvedChestBlock),"Items");
 
         IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
         //registry.addRecipeCategories(new CraftingRecipeCategory(guiHelper));
