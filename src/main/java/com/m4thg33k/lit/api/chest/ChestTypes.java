@@ -1,5 +1,6 @@
 package com.m4thg33k.lit.api.chest;
 
+import com.m4thg33k.lit.core.crafting.ChestRecipe;
 import com.m4thg33k.lit.core.util.LogHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -124,24 +125,44 @@ public class ChestTypes {
     {
         if (this.useCheapRecipe) {
             if (!overrideCenter) {
-                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "m", "c", "m", 'm', material, 'c', "chestWood"));// Blocks.chest);
+                GameRegistry.addRecipe(new ChestRecipe(this.getBlock(), "m", "c", "m", 'm', material, 'c', "chestWood"));// Blocks.chest);
             }
             for (Object center : alternateCenters)
             {
-                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "m", "c", "m", 'm', material, 'c', center));
+                GameRegistry.addRecipe(new ChestRecipe(this.getBlock(), "m", "c", "m", 'm', material, 'c', center));
             }
         }
 
         else {
             if (!overrideCenter)
             {
-                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', material, 'c', "chestWood"));// Blocks.chest);
+                GameRegistry.addRecipe(new ChestRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', material, 'c', "chestWood"));// Blocks.chest);
             }
             for (Object center : alternateCenters)
             {
-                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', material, 'c', center));
+                GameRegistry.addRecipe(new ChestRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', material, 'c', center));
             }
         }
+//        if (this.useCheapRecipe) {
+//            if (!overrideCenter) {
+//                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "m", "c", "m", 'm', material, 'c', "chestWood"));// Blocks.chest);
+//            }
+//            for (Object center : alternateCenters)
+//            {
+//                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "m", "c", "m", 'm', material, 'c', center));
+//            }
+//        }
+//
+//        else {
+//            if (!overrideCenter)
+//            {
+//                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', material, 'c', "chestWood"));// Blocks.chest);
+//            }
+//            for (Object center : alternateCenters)
+//            {
+//                GameRegistry.addRecipe(new ShapedOreRecipe(this.getBlock(), "mmm", "mcm", "mmm", 'm', material, 'c', center));
+//            }
+//        }
     }
 
     public static void regRecipes()
