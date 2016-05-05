@@ -3,6 +3,7 @@ package com.m4thg33k.lit.blocks;
 import com.m4thg33k.lit.LIT;
 import com.m4thg33k.lit.lib.Names;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -23,6 +24,6 @@ public class CharcoalBlock extends BaseBlock implements IFuelHandler{
 
     @Override
     public int getBurnTime(ItemStack fuel) {
-        return fuel.getItemDamage() == 0 ? 16000 : 0;
+        return (fuel.getItem()== Item.getItemFromBlock(ModBlocks.charcoalBlock) && fuel.getItemDamage() == 0) ? 16000 : 0;
     }
 }
