@@ -17,7 +17,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -25,9 +27,14 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ImprovedChestBlock extends BlockContainer implements IExtendable{
 
@@ -144,6 +151,10 @@ public class ImprovedChestBlock extends BlockContainer implements IExtendable{
             TileImprovedChest chest = (TileImprovedChest)te;
             chest.wasPlaced(placer,stack);
             chest.setFacing(EnumFacing.VALUES[chestFacing]);
+            if (stack.hasTagCompound())
+            {
+                chest.readInventoryFromNBT(stack.getTagCompound());
+            }
             worldIn.markAndNotifyBlock(pos,null,state,state,0);
 //        worldIn.markBlockForUpdate(pos);
         }
@@ -151,9 +162,32 @@ public class ImprovedChestBlock extends BlockContainer implements IExtendable{
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileImprovedChest chest = (TileImprovedChest)worldIn.getTileEntity(pos);
-        InventoryHelper.dropInventoryItems(worldIn,pos,chest);
+//        TileImprovedChest chest = (TileImprovedChest)worldIn.getTileEntity(pos);
+//        InventoryHelper.dropInventoryItems(worldIn,pos,chest);
+        TileImprovedChest tile = (TileImprovedChest) worldIn.getTileEntity(pos);
+        NBTTagCompound tagCompound = tile.getInventoryNBT();
+
+        ItemStack droppedItem = new ItemStack(this.getItemDropped(state,null,0));
+        if (tagCompound!=null)
+        {
+            droppedItem.setTagCompound(tagCompound);
+        }
+
+        InventoryHelper.spawnItemStack(worldIn,pos.getX(),pos.getY(),pos.getZ(),droppedItem);
+
         super.breakBlock(worldIn,pos,state);
+    }
+
+    @Override
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+
+        return new ArrayList<ItemStack>();
+    }
+
+
+    @Override
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
     }
 
     @Override
@@ -216,4 +250,14 @@ public class ImprovedChestBlock extends BlockContainer implements IExtendable{
 //    public int getRenderType(IBlockState state) {
 //        return 2;
 //    }
+
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, player, tooltip, advanced);
+        if (stack.hasTagCompound())
+        {
+            tooltip.add(TextFormatting.GOLD + "" +  TextFormatting.ITALIC + "Contains Items" );
+        }
+    }
 }

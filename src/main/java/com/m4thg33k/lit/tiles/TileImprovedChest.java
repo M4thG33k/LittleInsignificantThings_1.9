@@ -407,4 +407,43 @@ public class TileImprovedChest extends TileEntityLockable implements ITickable, 
     public boolean canRenderBreaking() {
         return true;
     }
+
+    public void readInventoryFromNBT(NBTTagCompound compound)
+    {
+        NBTTagList list = compound.getTagList("Items",10);
+        for (int i=0;i<list.tagCount();i++)
+        {
+            NBTTagCompound stackTag = list.getCompoundTagAt(i);
+            int slot = stackTag.getByte("Slot") & 0xff;
+            if (slot >= 0 && slot<inventory.length)
+            {
+                inventory[slot] = ItemStack.loadItemStackFromNBT(stackTag);
+            }
+        }
+    }
+
+    public NBTTagCompound getInventoryNBT()
+    {
+        NBTTagList list = new NBTTagList();
+        for (int i=0;i<this.getSizeInventory();i++)
+        {
+            ItemStack stack = this.getStackInSlot(i);
+            if (stack!=null)
+            {
+                NBTTagCompound stackTag = new NBTTagCompound();
+                stackTag.setByte("Slot",(byte)i);
+                stack.writeToNBT(stackTag);
+                list.appendTag(stackTag);
+            }
+        }
+
+        if (list.tagCount()==0)
+        {
+            return null;
+        }
+
+        NBTTagCompound tagCompound = new NBTTagCompound();
+        tagCompound.setTag("Items",list);
+        return tagCompound;
+    }
 }
