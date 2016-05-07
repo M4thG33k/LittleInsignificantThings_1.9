@@ -634,7 +634,10 @@ public class TileImprovedFurnace extends TileEntity implements ISidedInventory,I
 
             float f3 = 0.05f;
 
-            EntityItem item = new EntityItem(world, pos.getX()+f,pos.getY()+f1,pos.getZ()+f2,upgrades[i]);
+            ItemStack theItem = upgrades[i].copy();
+            theItem.stackSize = 1;
+
+            EntityItem item = new EntityItem(world, pos.getX()+f,pos.getY()+f1,pos.getZ()+f2,theItem);
 
             item.motionX = world.rand.nextGaussian() * (double)f3;
             item.motionY = world.rand.nextGaussian() * (double)f3 + 0.2;
