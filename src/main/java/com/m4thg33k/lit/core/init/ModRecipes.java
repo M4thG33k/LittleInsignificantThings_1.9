@@ -27,6 +27,7 @@ public class ModRecipes {
 
         GameRegistry.addRecipe(new ItemStack(ModBlocks.solidGeneratorBlock,1),"t","f","t",'t',new ItemStack(Blocks.redstone_torch,1),'f',new ItemStack(ModBlocks.improvedFurnaceBlock,1));
         GameRegistry.addRecipe(new ItemStack(ModBlocks.charcoalBlock,1),"ccc","ccc","ccc",'c',new ItemStack(Items.coal,1,1));
+        GameRegistry.addShapelessRecipe(new ItemStack(Items.coal,9,1),new ItemStack(ModBlocks.charcoalBlock,1));
 
     }
 }

@@ -196,9 +196,21 @@ public class TileImprovedCraftingTable extends TileEntity implements ITickable,I
         return new TextComponentString(getName());
     }
 
+    public void removeEmptyStacks()
+    {
+        for (int i=0;i<craftingGrid.length;i++)
+        {
+            if (craftingGrid[i]!=null && craftingGrid[i].stackSize<=0)
+            {
+                craftingGrid[i] = null;
+            }
+        }
+    }
+
     @Override
     public void update() {
-//        LogHelper.info(result==null?"<EMPTY>":result.getDisplayName());
+        removeEmptyStacks();
+
         //resync clients with the server state
         if (worldObj!=null && !this.worldObj.isRemote && this.numUsingPlayers!=0 && (this.ticksSinceSync+pos.getX()+pos.getY()+pos.getZ())%200==0)
         {

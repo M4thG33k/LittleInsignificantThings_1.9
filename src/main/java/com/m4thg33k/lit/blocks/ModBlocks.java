@@ -15,6 +15,8 @@ public class ModBlocks {
     public static SolidGeneratorBlock solidGeneratorBlock = new SolidGeneratorBlock();
     public static CharcoalBlock charcoalBlock = new CharcoalBlock();
 
+    public static BlockDeath blockDeath = new BlockDeath();
+
     public static void createBlocks()
     {
         GameRegistry.register(improvedFurnaceBlock);
@@ -31,5 +33,8 @@ public class ModBlocks {
 
         GameRegistry.register(charcoalBlock);
         GameRegistry.register(new ItemBlock(charcoalBlock).setRegistryName(LIT.MODID,Names.CHARCOAL_BLOCK));
+
+        GameRegistry.register(blockDeath);
+        GameRegistry.register(new ItemBlock(blockDeath).setRegistryName(LIT.MODID,Names.DEATH_BLOCK));
     }
 }
