@@ -36,12 +36,12 @@ public class LITCommonEvents {
         if (LITConfigs.ENABLE_GRAVES && event.getEntityLiving() instanceof EntityPlayer)
         {
             EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-            ChatHelper.sayMessage(player.worldObj,player,"Place of death (x,y,z) = ("+ (int)player.posX + "," + (int)player.posY + "," + (int)player.posZ + ")");
             if (!player.worldObj.isRemote)
             {
                 IBlockState state = ModBlocks.blockDeath.getDefaultState();
                 BlockPos posToPlace = findValidLocation(player.worldObj,player.getPosition());
                 if (posToPlace.getY()!=-1) {
+                    ChatHelper.sayMessage(player.worldObj,player,"Place of death (x,y,z) = ("+ posToPlace.getX() + "," + posToPlace.getY() + "," + posToPlace.getZ() + ")");
                     player.worldObj.setBlockState(posToPlace, state);
                     TileEntity tileEntity = player.worldObj.getTileEntity(posToPlace);
                     if (tileEntity != null && tileEntity instanceof TileDeathBlock) {
@@ -49,6 +49,10 @@ public class LITCommonEvents {
                     } else {
                         LogHelper.info("Error! Death block tile not found!");
                     }
+                }
+                else
+                {
+                    ChatHelper.sayMessage(player.worldObj,player,"Could not find suitable grave location.");
                 }
 
             }

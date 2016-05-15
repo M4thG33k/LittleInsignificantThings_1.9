@@ -1,0 +1,329 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:orientable",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "facing=north,on=true,variant=iron": [{
+      "textures":{
+        "front": "lit:blocks/IronFurnaceBlockFrontON",
+        "side": "lit:blocks/IronFurnaceBlock",
+        "top": "lit:blocks/IronFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=true,variant=gold": [{
+      "textures":{
+        "front": "lit:blocks/GoldFurnaceBlockFrontON",
+        "side": "lit:blocks/GoldFurnaceBlock",
+        "top": "lit:blocks/GoldFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=true,variant=diamond": [{
+      "textures":{
+        "front": "lit:blocks/DiamondFurnaceBlockFrontON",
+        "side": "lit:blocks/DiamondFurnaceBlock",
+        "top": "lit:blocks/DiamondFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=true,variant=redstone": [{
+      "textures":{
+        "front": "lit:blocks/RedstoneFurnaceBlockFrontON",
+        "side": "lit:blocks/RedstoneFurnaceBlock",
+        "top": "lit:blocks/RedstoneFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=true,variant=lapis": [{
+      "textures":{
+        "front": "lit:blocks/LapisFurnaceBlockFrontON",
+        "side": "lit:blocks/LapisFurnaceBlock",
+        "top": "lit:blocks/LapisFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=false,variant=iron": [{
+      "textures":{
+        "front": "lit:blocks/IronFurnaceBlockFront",
+        "side": "lit:blocks/IronFurnaceBlock",
+        "top": "lit:blocks/IronFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=false,variant=gold": [{
+      "textures":{
+        "front": "lit:blocks/GoldFurnaceBlockFront",
+        "side": "lit:blocks/GoldFurnaceBlock",
+        "top": "lit:blocks/GoldFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=false,variant=diamond": [{
+      "textures":{
+        "front": "lit:blocks/DiamondFurnaceBlockFront",
+        "side": "lit:blocks/DiamondFurnaceBlock",
+        "top": "lit:blocks/DiamondFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=false,variant=redstone": [{
+      "textures":{
+        "front": "lit:blocks/RedstoneFurnaceBlockFront",
+        "side": "lit:blocks/RedstoneFurnaceBlock",
+        "top": "lit:blocks/RedstoneFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=north,on=false,variant=lapis": [{
+      "textures":{
+        "front": "lit:blocks/LapisFurnaceBlockFront",
+        "side": "lit:blocks/LapisFurnaceBlock",
+        "top": "lit:blocks/LapisFurnaceBlock"
+      },
+      "y": 0
+    }],
+    "facing=south,on=true,variant=iron": [{
+      "textures":{
+        "front": "lit:blocks/IronFurnaceBlockFrontON",
+        "side": "lit:blocks/IronFurnaceBlock",
+        "top": "lit:blocks/IronFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=true,variant=gold": [{
+      "textures":{
+        "front": "lit:blocks/GoldFurnaceBlockFrontON",
+        "side": "lit:blocks/GoldFurnaceBlock",
+        "top": "lit:blocks/GoldFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=true,variant=diamond": [{
+      "textures":{
+        "front": "lit:blocks/DiamondFurnaceBlockFrontON",
+        "side": "lit:blocks/DiamondFurnaceBlock",
+        "top": "lit:blocks/DiamondFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=true,variant=redstone": [{
+      "textures":{
+        "front": "lit:blocks/RedstoneFurnaceBlockFrontON",
+        "side": "lit:blocks/RedstoneFurnaceBlock",
+        "top": "lit:blocks/RedstoneFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=true,variant=lapis": [{
+      "textures":{
+        "front": "lit:blocks/LapisFurnaceBlockFrontON",
+        "side": "lit:blocks/LapisFurnaceBlock",
+        "top": "lit:blocks/LapisFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=false,variant=iron": [{
+      "textures":{
+        "front": "lit:blocks/IronFurnaceBlockFront",
+        "side": "lit:blocks/IronFurnaceBlock",
+        "top": "lit:blocks/IronFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=false,variant=gold": [{
+      "textures":{
+        "front": "lit:blocks/GoldFurnaceBlockFront",
+        "side": "lit:blocks/GoldFurnaceBlock",
+        "top": "lit:blocks/GoldFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=false,variant=diamond": [{
+      "textures":{
+        "front": "lit:blocks/DiamondFurnaceBlockFront",
+        "side": "lit:blocks/DiamondFurnaceBlock",
+        "top": "lit:blocks/DiamondFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=false,variant=redstone": [{
+      "textures":{
+        "front": "lit:blocks/RedstoneFurnaceBlockFront",
+        "side": "lit:blocks/RedstoneFurnaceBlock",
+        "top": "lit:blocks/RedstoneFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=south,on=false,variant=lapis": [{
+      "textures":{
+        "front": "lit:blocks/LapisFurnaceBlockFront",
+        "side": "lit:blocks/LapisFurnaceBlock",
+        "top": "lit:blocks/LapisFurnaceBlock"
+      },
+      "y": 180
+    }],
+    "facing=west,on=true,variant=iron": [{
+      "textures":{
+        "front": "lit:blocks/IronFurnaceBlockFrontON",
+        "side": "lit:blocks/IronFurnaceBlock",
+        "top": "lit:blocks/IronFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=true,variant=gold": [{
+      "textures":{
+        "front": "lit:blocks/GoldFurnaceBlockFrontON",
+        "side": "lit:blocks/GoldFurnaceBlock",
+        "top": "lit:blocks/GoldFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=true,variant=diamond": [{
+      "textures":{
+        "front": "lit:blocks/DiamondFurnaceBlockFrontON",
+        "side": "lit:blocks/DiamondFurnaceBlock",
+        "top": "lit:blocks/DiamondFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=true,variant=redstone": [{
+      "textures":{
+        "front": "lit:blocks/RedstoneFurnaceBlockFrontON",
+        "side": "lit:blocks/RedstoneFurnaceBlock",
+        "top": "lit:blocks/RedstoneFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=true,variant=lapis": [{
+      "textures":{
+        "front": "lit:blocks/LapisFurnaceBlockFrontON",
+        "side": "lit:blocks/LapisFurnaceBlock",
+        "top": "lit:blocks/LapisFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=false,variant=iron": [{
+      "textures":{
+        "front": "lit:blocks/IronFurnaceBlockFront",
+        "side": "lit:blocks/IronFurnaceBlock",
+        "top": "lit:blocks/IronFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=false,variant=gold": [{
+      "textures":{
+        "front": "lit:blocks/GoldFurnaceBlockFront",
+        "side": "lit:blocks/GoldFurnaceBlock",
+        "top": "lit:blocks/GoldFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=false,variant=diamond": [{
+      "textures":{
+        "front": "lit:blocks/DiamondFurnaceBlockFront",
+        "side": "lit:blocks/DiamondFurnaceBlock",
+        "top": "lit:blocks/DiamondFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=false,variant=redstone": [{
+      "textures":{
+        "front": "lit:blocks/RedstoneFurnaceBlockFront",
+        "side": "lit:blocks/RedstoneFurnaceBlock",
+        "top": "lit:blocks/RedstoneFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=west,on=false,variant=lapis": [{
+      "textures":{
+        "front": "lit:blocks/LapisFurnaceBlockFront",
+        "side": "lit:blocks/LapisFurnaceBlock",
+        "top": "lit:blocks/LapisFurnaceBlock"
+      },
+      "y": 270
+    }],
+    "facing=east,on=true,variant=iron": [{
+      "textures":{
+        "front": "lit:blocks/IronFurnaceBlockFrontON",
+        "side": "lit:blocks/IronFurnaceBlock",
+        "top": "lit:blocks/IronFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=true,variant=gold": [{
+      "textures":{
+        "front": "lit:blocks/GoldFurnaceBlockFrontON",
+        "side": "lit:blocks/GoldFurnaceBlock",
+        "top": "lit:blocks/GoldFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=true,variant=diamond": [{
+      "textures":{
+        "front": "lit:blocks/DiamondFurnaceBlockFrontON",
+        "side": "lit:blocks/DiamondFurnaceBlock",
+        "top": "lit:blocks/DiamondFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=true,variant=redstone": [{
+      "textures":{
+        "front": "lit:blocks/RedstoneFurnaceBlockFrontON",
+        "side": "lit:blocks/RedstoneFurnaceBlock",
+        "top": "lit:blocks/RedstoneFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=true,variant=lapis": [{
+      "textures":{
+        "front": "lit:blocks/LapisFurnaceBlockFrontON",
+        "side": "lit:blocks/LapisFurnaceBlock",
+        "top": "lit:blocks/LapisFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=false,variant=iron": [{
+      "textures":{
+        "front": "lit:blocks/IronFurnaceBlockFront",
+        "side": "lit:blocks/IronFurnaceBlock",
+        "top": "lit:blocks/IronFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=false,variant=gold": [{
+      "textures":{
+        "front": "lit:blocks/GoldFurnaceBlockFront",
+        "side": "lit:blocks/GoldFurnaceBlock",
+        "top": "lit:blocks/GoldFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=false,variant=diamond": [{
+      "textures":{
+        "front": "lit:blocks/DiamondFurnaceBlockFront",
+        "side": "lit:blocks/DiamondFurnaceBlock",
+        "top": "lit:blocks/DiamondFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=false,variant=redstone": [{
+      "textures":{
+        "front": "lit:blocks/RedstoneFurnaceBlockFront",
+        "side": "lit:blocks/RedstoneFurnaceBlock",
+        "top": "lit:blocks/RedstoneFurnaceBlock"
+      },
+      "y": 90
+    }],
+    "facing=east,on=false,variant=lapis": [{
+      "textures":{
+        "front": "lit:blocks/LapisFurnaceBlockFront",
+        "side": "lit:blocks/LapisFurnaceBlock",
+        "top": "lit:blocks/LapisFurnaceBlock"
+      },
+      "y": 90
+    }]
+  }
+}

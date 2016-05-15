@@ -17,6 +17,8 @@ public class ModBlocks {
 
     public static BlockDeath blockDeath = new BlockDeath();
 
+    public static BetterFurnaceBlock betterFurnaceBlock = new BetterFurnaceBlock();
+
     public static void createBlocks()
     {
         GameRegistry.register(improvedFurnaceBlock);
@@ -36,5 +38,8 @@ public class ModBlocks {
 
         GameRegistry.register(blockDeath);
         GameRegistry.register(new ItemBlock(blockDeath).setRegistryName(LIT.MODID,Names.DEATH_BLOCK));
+
+        GameRegistry.register(betterFurnaceBlock);
+
     }
 }

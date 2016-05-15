@@ -1,6 +1,7 @@
 package com.m4thg33k.lit.core.proxy;
 
 import com.m4thg33k.lit.LIT;
+import com.m4thg33k.lit.blocks.ItemBlocks.ModItemBlocks;
 import com.m4thg33k.lit.blocks.ModBlocks;
 import com.m4thg33k.lit.core.event.LITCommonEvents;
 import com.m4thg33k.lit.core.init.InitChestTypes;
@@ -28,6 +29,7 @@ public class CommonProxy {
         LITPackets.init();
         ModItems.createItems();
         ModBlocks.createBlocks();
+        ModItemBlocks.create();
         InitFurnaceTypes.createFurnaceTypes();
         InitChestTypes.createChestTypes();
     }

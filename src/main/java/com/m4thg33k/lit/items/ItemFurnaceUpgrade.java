@@ -38,13 +38,12 @@ public class ItemFurnaceUpgrade extends Item {
 
         if (te.canReceiveUpgrade())
         {
-            te.installUpgrade(stack);
+            te.installUpgrade(playerIn,stack);
             stack.stackSize--;
             if (stack.stackSize==0)
             {
                 stack = null;
             }
-            ChatHelper.sayMessage(worldIn,playerIn,"Upgrade Installed!");
             return EnumActionResult.SUCCESS;
         }
         else

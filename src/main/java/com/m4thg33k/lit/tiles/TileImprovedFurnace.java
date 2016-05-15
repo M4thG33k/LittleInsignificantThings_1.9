@@ -1,6 +1,7 @@
 package com.m4thg33k.lit.tiles;
 
 import com.m4thg33k.lit.api.furnace.FurnaceTypes;
+import com.m4thg33k.lit.core.util.ChatHelper;
 import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.lib.Constants;
 import com.m4thg33k.lit.network.packets.LITPackets;
@@ -589,8 +590,13 @@ public class TileImprovedFurnace extends TileEntity implements ISidedInventory,I
         return numUpgradesInstalled<upgradeCount;
     }
 
-    public void installUpgrade(ItemStack stack)
+    public void installUpgrade(EntityPlayer player,ItemStack stack)
     {
+        if (cookTimeFactor<=0.01 && stack.getItemDamage()==0)
+        {
+            ChatHelper.sayMessage(player.worldObj,player,"Adding that won't do anything...");
+            return;
+        }
         upgrades[numUpgradesInstalled] = stack.copy();
         numUpgradesInstalled++;
 
@@ -598,6 +604,10 @@ public class TileImprovedFurnace extends TileEntity implements ISidedInventory,I
         {
             case 0: //speed upgrade
                 cookTimeFactor *= Constants.SPEED_MULT;
+                if (getCookTime(null)==0)
+                {
+                    cookTimeFactor = .01;
+                }
                 break;
             case 1: //fuel boost upgrade
                 fuelBooster *= Constants.FUEL_MULT;
@@ -607,6 +617,7 @@ public class TileImprovedFurnace extends TileEntity implements ISidedInventory,I
                 break;
             default:
         }
+        ChatHelper.sayMessage(player.worldObj,player,"Upgrade Installed!");
     }
 
     public int getUpgradeCount()
