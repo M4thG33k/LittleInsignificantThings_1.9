@@ -433,6 +433,7 @@ public class TileImprovedFurnace extends TileEntity implements ISidedInventory,I
     public void update() {
         boolean on = isBurning();
         boolean isDirty = false;
+        boolean sendPacket = false;
 
 
         if (isBurning()) {
@@ -470,15 +471,20 @@ public class TileImprovedFurnace extends TileEntity implements ISidedInventory,I
 
             if (on != isBurning()) {
                 isDirty = true;
+                sendPacket = true;
                 isOn = isBurning();
             }
         }
 
         if (isDirty) {
             markDirty();
+        }
+        if (sendPacket)
+        {
             NBTTagCompound tag = new NBTTagCompound();
             writeToNBT(tag);
             LITPackets.INSTANCE.sendToAllAround(new PacketNBT(pos, tag), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 32));
+            LogHelper.info("Sending furnace packet");
         }
     }
 

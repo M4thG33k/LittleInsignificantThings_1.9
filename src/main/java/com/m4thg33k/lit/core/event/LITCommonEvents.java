@@ -9,11 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -33,30 +29,30 @@ public class LITCommonEvents {
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public void onPlayerDeath(LivingDeathEvent event)
     {
-        if (LITConfigs.ENABLE_GRAVES && event.getEntityLiving() instanceof EntityPlayer)
-        {
-            EntityPlayer player = (EntityPlayer)event.getEntityLiving();
-            if (!player.worldObj.isRemote)
-            {
-                IBlockState state = ModBlocks.blockDeath.getDefaultState();
-                BlockPos posToPlace = findValidLocation(player.worldObj,player.getPosition());
-                if (posToPlace.getY()!=-1) {
-                    ChatHelper.sayMessage(player.worldObj,player,"Place of death (x,y,z) = ("+ posToPlace.getX() + "," + posToPlace.getY() + "," + posToPlace.getZ() + ")");
-                    player.worldObj.setBlockState(posToPlace, state);
-                    TileEntity tileEntity = player.worldObj.getTileEntity(posToPlace);
-                    if (tileEntity != null && tileEntity instanceof TileDeathBlock) {
-                        ((TileDeathBlock) tileEntity).grabPlayer(player);
-                    } else {
-                        LogHelper.info("Error! Death block tile not found!");
-                    }
-                }
-                else
-                {
-                    ChatHelper.sayMessage(player.worldObj,player,"Could not find suitable grave location.");
-                }
-
-            }
-        }
+//        if (LITConfigs.ENABLE_GRAVES && event.getEntityLiving() instanceof EntityPlayer)
+//        {
+//            EntityPlayer player = (EntityPlayer)event.getEntityLiving();
+//            if (!player.worldObj.isRemote)
+//            {
+//                IBlockState state = ModBlocks.blockDeath.getDefaultState();
+//                BlockPos posToPlace = findValidLocation(player.worldObj,player.getPosition());
+//                if (posToPlace.getY()!=-1) {
+//                    ChatHelper.sayMessage(player.worldObj,player,"Place of death (x,y,z) = ("+ posToPlace.getX() + "," + posToPlace.getY() + "," + posToPlace.getZ() + ")");
+//                    player.worldObj.setBlockState(posToPlace, state);
+//                    TileEntity tileEntity = player.worldObj.getTileEntity(posToPlace);
+//                    if (tileEntity != null && tileEntity instanceof TileDeathBlock) {
+//                        ((TileDeathBlock) tileEntity).grabPlayer(player);
+//                    } else {
+//                        LogHelper.info("Error! Death block tile not found!");
+//                    }
+//                }
+//                else
+//                {
+//                    ChatHelper.sayMessage(player.worldObj,player,"Could not find suitable grave location.");
+//                }
+//
+//            }
+//        }
     }
 
     private BlockPos findValidLocation(World world, BlockPos pos)

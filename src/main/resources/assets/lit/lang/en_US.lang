@@ -18,6 +18,12 @@ tile.SolidGeneratorBlock.name=Solid Fueled Generator
 tile.CharcoalBlock.name=Block of Charcoal
 tile.DeathBlock.name=Player Grave
 
+tile.BetterFurnaceBlock_iron.name=Iron Furnace
+tile.BetterFurnaceBlock_gold.name=Gold Furnace
+tile.BetterFurnaceBlock_diamond.name=Diamond Furnace
+tile.BetterFurnaceBlock_redstone.name=Redstone Furnace
+tile.BetterFurnaceBlock_lapis.name=Lapis Furnace
+
 #-------------------------------------------------------------------
 # Items
 #-------------------------------------------------------------------

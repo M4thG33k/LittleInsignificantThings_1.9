@@ -3,6 +3,7 @@ package com.m4thg33k.lit.tiles;
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
+import com.m4thg33k.lit.core.util.LogHelper;
 import com.m4thg33k.lit.lib.Names;
 import com.m4thg33k.lit.network.packets.LITPackets;
 import com.m4thg33k.lit.network.packets.PacketNBT;
@@ -184,6 +185,7 @@ public class TileSolidGenerator extends TileEntity implements IEnergyProvider,IT
     public void update() {
         boolean on = isBurning();
         boolean isDirty = false;
+        boolean sendPacket = false;
 
         if (isBurning())
         {
@@ -206,6 +208,7 @@ public class TileSolidGenerator extends TileEntity implements IEnergyProvider,IT
             if (on != isBurning())
             {
                 isDirty = true;
+                sendPacket = true;
                 isOn = isBurning();
             }
 
@@ -217,9 +220,11 @@ public class TileSolidGenerator extends TileEntity implements IEnergyProvider,IT
 
         }
 
-        if (isDirty)
-        {
+        if (isDirty) {
             markDirty();
+        }
+        if (sendPacket)
+        {
             NBTTagCompound tag = new NBTTagCompound();
             writeToNBT(tag);
             LITPackets.INSTANCE.sendToAllAround(new PacketNBT(pos,tag),new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(),pos.getX(),pos.getY(),pos.getZ(),32));

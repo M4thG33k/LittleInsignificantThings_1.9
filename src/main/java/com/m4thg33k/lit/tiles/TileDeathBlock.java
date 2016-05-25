@@ -290,8 +290,11 @@ public class TileDeathBlock extends TileEntity implements ISidedInventory {
     public void dropAllItems()
     {
         InventoryHelper.dropInventoryItems(worldObj,pos,this);
-        InventoryBaubles baubles = new InventoryBaubles(null);
-        baubles.readNBT(baublesNBT);
-        InventoryHelper.dropInventoryItems(worldObj,pos,baubles);
+
+        if (LIT.isBaublesInstalled) {
+            InventoryBaubles baubles = new InventoryBaubles(null);
+            baubles.readNBT(baublesNBT);
+            InventoryHelper.dropInventoryItems(worldObj, pos, baubles);
+        }
     }
 }
