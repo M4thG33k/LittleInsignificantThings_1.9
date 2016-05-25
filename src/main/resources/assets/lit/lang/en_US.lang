@@ -16,7 +16,7 @@ tile.ImprovedChestBlock.name=Improved Chest
 tile.ImprovedCraftingTableBlock.name=Improved Crafting Table
 tile.SolidGeneratorBlock.name=Solid Fueled Generator
 tile.CharcoalBlock.name=Block of Charcoal
-tile.DeathBlock.name=Player Grave
+tile.DeathBlock.name=Player Grave [Deprecated]
 
 tile.BetterFurnaceBlock_iron.name=Iron Furnace
 tile.BetterFurnaceBlock_gold.name=Gold Furnace
